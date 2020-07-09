@@ -39,10 +39,11 @@ class LND {
   }
 
   private function client() {
-    $client = new GuzzleHttp\Client([
-      'base_uri' => $this->baseURI,
-      //'verify' => $tlsPath
-    ]);
+    $options = ['base_uri' => $this->baseURI];
+    if ($this->tlsCertificatePath) {
+      $options['verify'] = $this->tlsCertificatePath;
+    }
+    $client = new GuzzleHttp\Client($options);
     return $client;
   }
 }
