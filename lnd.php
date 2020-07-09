@@ -22,6 +22,19 @@ class LND {
     return $this->request('GET', 'getinfo');
   }
 
+  public function addInvoice($invoice) {
+    return $this->request('POST', 'invoices', json_encode($invoice));
+  }
+
+  public function getInvoice($r_hash_str) {
+    return $this->request('GET', 'invoice/' . bin2hex(base64_decode($r_hash_str)));
+  }
+
+  public function isInvoicePaid($r_hash_str) {
+    $invoice = $this->getInvoice($r_hash_str);
+    return $invoice->{'settled'};
+  }
+
   private function request($method, $path, $body = null) {
     $headers = [
       'Grpc-Metadata-macaroon' => $this->macaroonHex,
@@ -31,8 +44,8 @@ class LND {
     $request = new GuzzleHttp\Psr7\Request($method, $path, $headers, $body);
     $response = $this->client()->send($request);
     if ($response->getStatusCode() == 200) {
-      $body = $response->getBody()->getContents();
-      return json_decode($body);
+      $responseBody = $response->getBody()->getContents();
+      return json_decode($responseBody);
     } else {
       // raise exception
     }

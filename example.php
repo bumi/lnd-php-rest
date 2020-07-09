@@ -14,4 +14,21 @@ $info = $lnd->getInfo();
 
 var_dump($info->{'alias'});
 
+
+$invoice = $lnd->addInvoice([
+  'memo' => 'PHP',
+  'value' => 100 // in sats
+]);
+var_dump($invoice);
+
+
+$lnd->getInvoice('hWV05idFvavApCYKpbYdYtfv8JQ6zhYONKOEn7ueBlY=');
+$i = $lnd->getInvoice($invoice->{'r_hash'});
+
+if ($i->{'settled'}) {
+  echo 'paid';
+} else {
+  echo "open\n";
+  echo "pay: " . $i->{'payment_request'};
+}
 ?>
