@@ -1,5 +1,16 @@
 {
+    "name": "lndrest/composer",
+    "description": "An lnd class",
+    "type": "composer-plugin",
     "require": {
-        "guzzlehttp/guzzle": "^7.0"
-    }
+        "php": "^7.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bumi",
+            "email": "hello@michaelbumann.com"
+        }
+    ],
+    "minimum-stability": "dev"
 }

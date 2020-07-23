@@ -2,7 +2,7 @@
 
 require 'lnd.php';
 
-$host = '';
+$host = 'lndt.michaelbumann.com';
 $tlsPath = '';
 $macaroonHex = '';
 

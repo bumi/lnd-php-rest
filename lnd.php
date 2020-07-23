@@ -1,6 +1,6 @@
 <?php
-require 'vendor/autoload.php';
-
+//require '/lnd-php-rest/vendor/autoload.php';
+require dirname(__FILE__).'/../lnd-php-rest/vendor/autoload.php';
 class LND {
 
   private $apiVersion = 'v1';
