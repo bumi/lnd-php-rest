@@ -1,5 +1,5 @@
 {
-    "name": "lnd/php-rest",
+    "name": "octan/lnd-rest",
     "description": "A client for the lnd REST API",
     "type": "library",
     "require": {
