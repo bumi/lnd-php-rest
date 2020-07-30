@@ -1,6 +1,8 @@
 <?php
-//require dirname(__FILE__).'/../lnd-php-rest/vendor/autoload.php';
-class LND {
+
+namespace LND;
+
+class Client {
 
   private $apiVersion = 'v1';
   private $baseURI = '';

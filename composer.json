@@ -16,5 +16,10 @@
             "email":"promesse@octan.group"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "LND\\": "src/"
+        }
+    },
     "minimum-stability": "dev"
 }
