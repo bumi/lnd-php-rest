@@ -6,10 +6,12 @@ class Client {
 
   private $apiVersion = 'v1';
   private $baseURI = '';
+  private $host = '';
   private $tlsCertificatePath = '';
-  private $macaroonHex;
+  private $macaroonHex = '';
 
   public function setHost($host) {
+    $this->host = $host;
     $this->baseURI = 'https://' . $host . '/' . $this->apiVersion . '/';
   }
   public function setMacarronHex($macaroonHex) {
@@ -17,6 +19,18 @@ class Client {
   }
   public function setTlsCertificatePath($path) {
     $this->tlsCertificatePath = $path;
+  }
+
+  public function isConnectionValid() {
+    if (empty($this->baseURI) || empty($this->macaroonHex)) {
+      return false;
+    }
+    try {
+      $this->getInfo();
+      return true;
+    } catch (Exception $e) {
+      return false;
+    }
   }
 
   public function getInfo() {
