@@ -2,17 +2,20 @@
 
 namespace LND;
 
+use GuzzleHttp;
+
 class Client {
 
   private $apiVersion = 'v1';
   private $baseURI = '';
-  private $host = '';
+  private $address;
   private $tlsCertificatePath = '';
   private $macaroonHex = '';
+  private $client;
 
-  public function setHost($host) {
-    $this->host = $host;
-    $this->baseURI = 'https://' . $host . '/' . $this->apiVersion . '/';
+  public function setAddress($address) {
+    $this->address = $address;
+    $this->baseURI = $this->address . '/' . $this->apiVersion . '/';
   }
   public function setMacarronHex($macaroonHex) {
     $this->macaroonHex = $macaroonHex;
@@ -22,7 +25,7 @@ class Client {
   }
 
   public function isConnectionValid() {
-    if (empty($this->baseURI) || empty($this->macaroonHex)) {
+    if (empty($this->address) || empty($this->macaroonHex)) {
       return false;
     }
     try {
@@ -67,12 +70,15 @@ class Client {
   }
 
   private function client() {
+    if ($this->client) {
+      return $this->client;
+    }
     $options = ['base_uri' => $this->baseURI];
-    if ($this->tlsCertificatePath) {
+    if (!empty($this->tlsCertificatePath)) {
       $options['verify'] = $this->tlsCertificatePath;
     }
-    $client = new GuzzleHttp\Client($options);
-    return $client;
+    $this->client = new GuzzleHttp\Client($options);
+    return $this->client;
   }
 }
 
