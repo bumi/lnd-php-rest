@@ -3,7 +3,7 @@
     "description": "A client for the lnd REST API",
     "type": "library",
     "require": {
-        "php": "^8.0",
+        "php": ">=7.0.0",
         "guzzlehttp/guzzle": "^7.0"
     },
     "license": "MIT",
