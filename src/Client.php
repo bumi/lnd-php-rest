@@ -73,7 +73,7 @@ class Client {
     if ($this->client) {
       return $this->client;
     }
-    $options = ['base_uri' => $this->baseURI];
+    $options = ['base_uri' => $this->baseURI, 'timeout' => 10];
     if (!empty($this->tlsCertificatePath)) {
       $options['verify'] = $this->tlsCertificatePath;
     }
